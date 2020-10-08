@@ -4,13 +4,15 @@
   "description": "Electron app build using ReactJS and Parcel web application bundler",
   "main": "src/electron.js",
   "scripts": {
-    "react-start": "parcel -p 3000 index.html --out-dir build",
-    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "react-start": "yarn run watch:css && parcel -p 3000 index.html --out-dir build",
+    "react-build": "yarn run build:css && parcel build index.html --out-dir build --public-url ./",
     "electron-build": "electron-builder -mwl",
     "clean-build": "rm -rf build/ .cache dist/",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
-    "test-bundle": "bundlesize"
+    "test-bundle": "bundlesize",
+    "build:css":"postcss src/assets/tailwind.css -o src/assets/main.css",
+    "watch:css":"postcss src/assets/tailwind.css -o src/assets/main.css"
   },
   "bundlesize": [
     {
@@ -35,8 +37,8 @@
   "dependencies": {
     "electron-download": "^4.1.1",
     "electron-is-dev": "1.0.1",
-    "react": "16.7.0",
-    "react-dom": "16.7.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "semantic-ui-css": "2.4.1"
   },
   "build": {
@@ -62,6 +64,7 @@
   },
   "homepage": "./",
   "devDependencies": {
+    "autoprefixer": "^9.0.0",
     "babel-core": "6.26.3",
     "babel-plugin-transform-class-properties": "latest",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
@@ -75,6 +78,8 @@
     "electron-builder": "20.38.4",
     "kind-of": "^6.0.3",
     "parcel-bundler": "^1.12.4",
+    "postcss-cli": "^8.0.0",
+    "tailwindcss": "^1.8.10",
     "wait-on": "3.2.0"
   }
 }
