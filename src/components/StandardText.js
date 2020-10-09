@@ -8,6 +8,7 @@ import 'prismjs/components/prism-markup'
 import "prismjs/themes/prism.css";
 import pretty from 'pretty'
 
+
 const StandardText = ()=>{
     const [title, setTitle] = useState('')
     const [titleLen, setTitleLen] = useState('0')
@@ -23,8 +24,9 @@ const StandardText = ()=>{
 
     useEffect(()=>{
         const outputString = document.getElementById('final-output').innerHTML
-        var myNewString = outputString.replace(/\n|\s{2,}/g, '<br/>');
-        myNewString = pretty(myNewString)
+        var myNewString = outputString.replace(/\n/g, '<br/>');
+        ///\n|\s{2,}/g, '<br/>'
+        myNewString = pretty(myNewString,{ocd:true})
         setTemplateOutput(myNewString)
     },[title,content])
 
@@ -64,6 +66,12 @@ const StandardText = ()=>{
         }
     }
 
+    const copyTemplateCode = ()=>{
+        //var copyText = document.getElementById("templateCode")
+        navigator.clipboard.writeText(templateOutput)
+        alert('Code has been copied to your clipboard')
+    }
+
     return (
         <div className="py-2 w-full h-full flex flex-row flex-grow">
             {/* Form component */}
@@ -82,9 +90,9 @@ const StandardText = ()=>{
                     <div className={`text-sm text-right ${titleLen > 80 ? "text-red-400": "text-gray-400"} px-1`}>{titleLen}/80</div>
                 </div>  
                 <div className="mb-6 h-auto flex flex-col flex-grow">
-                    <label className="block text-gray-500 text-sm font-bold mb-2 flex-grow-0" htmlFor="title">Content</label>
+                    <label className="block text-gray-500 text-sm font-bold mb-2 flex-shrink-0" htmlFor="title">Content</label>
                     <textarea 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline h-auto"
+                        className="flex-grow shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline h-auto"
                         id="content" 
                         placeholder="Content"
                         value={content}
@@ -116,13 +124,22 @@ const StandardText = ()=>{
                         </div>
                     </div>
                 </div>
-                <div className="h-1/2 bg-white p-4 mx-3 mt-3 flex flex-col flex-grow-0 rounded shadow-md text-gray-700">
-                    <div className="flex flex-col justify-between mb-4 flex-shrink-0">
-                            <h3 className="font-semibold mb-4">Output...</h3>
+                <div className="h-1/2 bg-white p-4 mx-3 mt-3 flex flex-col flex-grow-0 rounded shadow-md">
+                    <div className="flex flex-col justify-between mb-4 flex-grow-0">
+                            <div className="flex flex-row mb-4 justify-between flex-shrink-0">
+                                <h3 className="font-semibold ">Output...</h3>
+                                <button 
+                                    className="p-2 rounded bg-gray-300 shadow-md hover:bg-clip-border hover:bg-gray-400"
+                                    onClick={copyTemplateCode}    
+                                >Copy</button>
+                            </div>
+                            
                             <div 
-                                className="rounded border-2 border-gray-400 p-4 overflow-auto h-auto bg-black text-gray-100"
+                                className="rounded border-2 border-gray-400 p-4 flex flex-grow "
                                 id = "output-code">
                                 <Editor
+                                    textareaId="templateCode"
+                                    className="h-auto w-full overflow-auto "
                                     placeholder="Type some code..."
                                     value={templateOutput}
                                     disabled={true}
@@ -132,7 +149,8 @@ const StandardText = ()=>{
                                     style={{
                                     fontFamily: '"Fira code", "Fira Mono", monospace',
                                     fontSize: 12,
-                                    backgroundColor:"#F5F5F5"
+                                    backgroundColor:"#F5F5F5",
+                                    overflowY:"scroll"
                                     }}
                                 />
                             </div>
