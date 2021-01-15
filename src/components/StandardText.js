@@ -101,14 +101,15 @@ const StandardText = ()=>{
                     <div className={`text-sm text-right ${contentLen > 2500 ? "text-red-400": "text-gray-400"} px-1`}>{contentLen}/2500</div>
                 </div>    
             </div>
-            {/* Preview component */}
+            {/* Preview */}
             <div className="w-1/2 flex flex-col ">
+                {/* Preview component */}
                 <div className=" h-1/2 bg-white p-4 mx-3 mb-3 flex flex-col flex-grow-0 rounded shadow-md text-gray-700">
                     <div className="flex flex-row justify-between mb-4 flex-shrink-0">
                         <h3 className="font-semibold ">Preview...</h3>
                         <ZoomComponent zoomHandler={updateZoom}/>
                     </div>
-                    
+                    {/* ***** Template ****** */}
                     <div className="rounded border-2 border-gray-400 p-4 overflow-auto h-auto">
                         <div id="final-output" className="">
                             <table>
@@ -124,6 +125,7 @@ const StandardText = ()=>{
                         </div>
                     </div>
                 </div>
+                {/* Export component */}
                 <div className="h-1/2 bg-white p-4 mx-3 mt-3 flex flex-col flex-grow-0 rounded shadow-md">
                     <div className="flex flex-col justify-between mb-4 flex-grow-0">
                             <div className="flex flex-row mb-4 justify-between flex-shrink-0">
@@ -157,7 +159,7 @@ const StandardText = ()=>{
                     </div>
                 </div>
             </div>
-            {/* Export component */}
+            
         </div>
         
     )
