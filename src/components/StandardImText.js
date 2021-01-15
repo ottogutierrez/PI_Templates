@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './StandardImText.css'
-import Editor from 'react-simple-code-editor'
-import { highlight, languages } from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-markup'
-import "prismjs/themes/prism.css";
-import pretty from 'pretty'
+
 import Field from './Field'
 import ImageField from './ImageField'
 import ZoomComponent from './ZoomComponent'
+import ExportComponent from './ExportComponent'
 
 const StandardImText = ()=>{
     const [state, setState] = useState({
@@ -17,7 +13,7 @@ const StandardImText = ()=>{
         imageLink:''
     })
 
-    const [templateOutput, setTemplateOutput] = useState('')
+    
 
     const updateState= (parameter,value) => {
         setState({...state,[parameter]:value})
@@ -58,19 +54,8 @@ const StandardImText = ()=>{
     }
 
 
-    useEffect(()=>{
-        const outputString = document.getElementById('final-output').innerHTML
-        var myNewString = outputString.replace(/\n/g, '<br/>');
-        ///\n|\s{2,}/g, '<br/>'
-        myNewString = pretty(myNewString,{ocd:true})
-        setTemplateOutput(myNewString)
-    },[state.title,state.content, state.imageLink])
 
-    const copyTemplateCode = ()=>{
-        //var copyText = document.getElementById("templateCode")
-        navigator.clipboard.writeText(templateOutput)
-        alert('Code has been copied to your clipboard')
-    }
+
 
     return(
         <div className="flex flex-grow text-gray-700">
@@ -109,36 +94,7 @@ const StandardImText = ()=>{
                 </div>
                 {/* Export component */}
                 <div className="bg-white p-4 mx-3 mt-3 flex flex-col flex-grow-0 rounded shadow-md">
-                    <div className="flex flex-col justify-between mb-4 flex-grow-0">
-                            <div className="flex flex-row mb-4 justify-between flex-shrink-0">
-                                <h3 className="font-semibold ">Output...</h3>
-                                <button 
-                                    className="p-2 rounded bg-gray-300 shadow-md hover:bg-clip-border hover:bg-gray-400"
-                                    onClick={copyTemplateCode}    
-                                >Copy</button>
-                            </div>
-                            
-                            <div 
-                                className="rounded border-2 border-gray-400 p-4 flex flex-grow "
-                                id = "output-code">
-                                <Editor
-                                    textareaId="templateCode"
-                                    className="h-auto w-full overflow-auto "
-                                    placeholder="Type some code..."
-                                    value={templateOutput}
-                                    disabled={true}
-                                    onValueChange={code => setCode( code )}
-                                    highlight={code => highlight(code, languages.html)}
-                                    padding={10}
-                                    style={{
-                                    fontFamily: '"Fira code", "Fira Mono", monospace',
-                                    fontSize: 12,
-                                    backgroundColor:"#F5F5F5",
-                                    overflowY:"scroll"
-                                    }}
-                                />
-                            </div>
-                    </div>
+                    <ExportComponent state={state}/>
                 </div>
                 
             </div>
@@ -147,3 +103,5 @@ const StandardImText = ()=>{
 }
 
 export default StandardImText
+
+
