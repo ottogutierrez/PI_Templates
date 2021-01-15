@@ -1,0 +1,36 @@
+:root {
+    --title-font: "";
+    --content-font: ""; 
+    --image-size: "";
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    color: black;
+    table-layout: fixed;
+}
+
+th {
+    /* font-size: large; */
+    font-size: var(--title-font);
+}
+
+td {
+    /* font-size: medium; */
+    font-size: var(--content-font);
+    white-space: pre-wrap;
+    word-wrap: break-word;  
+}
+
+#output-code {
+    white-space: pre-wrap;
+    word-wrap: break-word;  
+}
+
+img {
+    max-width: var(--image-size);
+    height: auto;
+    margin: 0 auto;
+}

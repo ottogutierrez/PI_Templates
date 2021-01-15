@@ -1,12 +1,12 @@
 {
-  "name": "electron-react-parcel",
+  "name": "pi_templates",
   "version": "1.0.0",
-  "description": "Electron app build using ReactJS and Parcel web application bundler",
+  "description": "PI Templates Application",
   "main": "src/electron.js",
   "scripts": {
     "react-start": "yarn run watch:css && parcel -p 3000 index.html --out-dir build",
     "react-build": "yarn run build:css && parcel build index.html --out-dir build --public-url ./",
-    "electron-build": "electron-builder -mwl",
+    "electron-build": "electron-builder -w",
     "clean-build": "rm -rf build/ .cache dist/",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
@@ -32,7 +32,7 @@
     "electron-react-parcel",
     "electron react parcel"
   ],
-  "author": "Yogesh Kumar <yogesh@boskysoft.com>",
+  "author": "Otto Gutierrez",
   "license": "MIT",
   "dependencies": {
     "electron-download": "^4.1.1",
@@ -45,7 +45,7 @@
     "semantic-ui-css": "2.4.1"
   },
   "build": {
-    "appId": "com.boskysoft",
+    "appId": "com.ogutierrez",
     "files": [
       "src/electron.js",
       "src/assets/*",
