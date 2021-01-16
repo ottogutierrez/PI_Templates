@@ -16,7 +16,7 @@ const ImageField = ({title, text, setText, identifier})=>{
 
 
     return(
-        <div className="">
+        <div className="px-4">
             <label className="block text-gray-500 text-sm font-bold mb-2" htmlFor="title">{title}</label>
             <input 
                 type="text" 
