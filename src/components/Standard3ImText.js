@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './StandardImText.css'
+import classNames from 'classnames'
+import Accordion from './Accordion'
 
 import Field from './Field'
 import ImageField from './ImageField'
 import ZoomComponent from './ZoomComponent'
 import ExportComponent from './ExportComponent'
+
 
 const StandardImText = ()=>{
 
@@ -62,21 +65,42 @@ const StandardImText = ()=>{
         }
     }
 
+    const [sectionState, setSectionState] = useState({
+        section1Visible:false,
+        section2Visible:false,
+        section3Visible:false
+    })
+
+    const toggleSectionState = (sectionName)=>{
+        const currentState = sectionState[sectionName]
+        setSectionState({...sectionState, [sectionName]:!currentState})
+    }
+
+    // {classNames('border overflow-hidden transition-all duration-700',{"max-h-0":sectionState.section1Visible})}
     return(
         <div className="flex flex-grow text-gray-700">
             {/* Form */}
-            <div className=" flex flex-grow flex-col bg-white p-4 mx-3 rounded shadow-md w-48 overflow-y-scroll">
-                <h3 className="font-semibold mb-4">Standard and Image Text Template</h3>
+            <div className=" flex flex-grow flex-col bg-white py-4 mx-3 rounded shadow-md w-48 overflow-y-scroll">
+                <h3 className="font-semibold mb-4 px-4">Standard 3 Images & Text Template</h3>
                 <Field title="Main Title" text={state.mainTitle} setText={updateState} maxLen={80} identifier="mainTitle" textArea={false} />
-                <ImageField title="Image 1 Link" text={state.image1Link} setText={updateState} identifier="image1Link" />
-                <ImageField title="Image 2 Link" text={state.image2Link} setText={updateState} identifier="image2Link" />
-                <ImageField title="Image 3 Link" text={state.image3Link} setText={updateState} identifier="image3Link" />
-                <Field title="Title 1" text={state.title1} setText={updateState} maxLen={80} identifier="title1" textArea={false} />
-                <Field title="Content 1" text={state.content1} setText={updateState} maxLen={2500} identifier="content1" textArea={true} />
-                <Field title="Title 2" text={state.title2} setText={updateState} maxLen={80} identifier="title2" textArea={false} />
-                <Field title="Content 2" text={state.content2} setText={updateState} maxLen={2500} identifier="content2" textArea={true} />
-                <Field title="Title 3" text={state.title3} setText={updateState} maxLen={80} identifier="title3" textArea={false} />
-                <Field title="Content 3" text={state.content3} setText={updateState} maxLen={2500} identifier="content3" textArea={true} />
+                <Accordion title="Section 1">
+                    <ImageField title="Image 1 Link" text={state.image1Link} setText={updateState} identifier="image1Link" />
+                    <Field title="Title 1" text={state.title1} setText={updateState} maxLen={80} identifier="title1" textArea={false} />
+                    <Field title="Content 1" text={state.content1} setText={updateState} maxLen={2500} identifier="content1" textArea={true} />
+                </Accordion>
+                <Accordion title="Section 2">
+                    <ImageField title="Image 2 Link" text={state.image2Link} setText={updateState} identifier="image2Link" />
+                    <Field title="Title 2" text={state.title2} setText={updateState} maxLen={80} identifier="title2" textArea={false} />
+                    <Field title="Content 2" text={state.content2} setText={updateState} maxLen={2500} identifier="content2" textArea={true} />
+                </Accordion>
+                <Accordion title="Section 3">
+                    <ImageField title="Image 3 Link" text={state.image3Link} setText={updateState} identifier="image3Link" />
+                    <Field title="Title 3" text={state.title3} setText={updateState} maxLen={80} identifier="title3" textArea={false} />
+                    <Field title="Content 3" text={state.content3} setText={updateState} maxLen={2500} identifier="content3" textArea={true} />
+                </Accordion>
+                
+                
+                
                 
             </div>
             {/* Preview Column*/}
