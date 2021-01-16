@@ -7,18 +7,19 @@ import ZoomComponent from './ZoomComponent'
 import ExportComponent from './ExportComponent'
 
 const StandardImText = ()=>{
+
+    // **** Component State ****
     const [state, setState] = useState({
         title:'',
         content:'',
         imageLink:''
     })
-
     
-
+    // **** Update State Function (helper) ****
     const updateState= (parameter,value) => {
         setState({...state,[parameter]:value})
     }
-
+    // **** Initialize Zoom ****
     useEffect(()=>{
         const root = document.documentElement
         root.style.setProperty('--title-font',"large")
@@ -26,6 +27,7 @@ const StandardImText = ()=>{
         root.style.setProperty('--image-size', "50%")
     },[])
 
+    // ***** Update Zoom *****
     const updateZoom = (newZoom)=>{
         // Update the styling of the zoom
         const root = document.documentElement
@@ -53,17 +55,13 @@ const StandardImText = ()=>{
         }
     }
 
-
-
-
-
     return(
         <div className="flex flex-grow text-gray-700">
             {/* Form */}
-            <div className=" flex flex-grow flex-col bg-white p-4 mx-3 rounded shadow-md w-48 ">
+            <div className=" flex flex-grow flex-col bg-white p-4 mx-3 rounded shadow-md w-48 overflow-scroll">
                 <h3 className="font-semibold mb-4">Standard and Image Text Template</h3>
-                <Field title="Title" text={state.title} setText={updateState} maxLen={80} identifier="title" />
-                <Field title="Content" text={state.content} setText={updateState} maxLen={2500} identifier="content" />
+                <Field title="Title" text={state.title} setText={updateState} maxLen={80} identifier="title" textArea={false} />
+                <Field title="Content" text={state.content} setText={updateState} maxLen={2500} identifier="content" textArea={true} />
                 <ImageField title="Image Link" text={state.imageLink} setText={updateState} identifier="imageLink" />
             </div>
             {/* Preview Column*/}
