@@ -1,0 +1,13 @@
+.content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
