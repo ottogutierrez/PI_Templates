@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StandardText from './components/StandardText'
 import StandardImText from './components/StandardImText'
+import Standard3ImText from './components/Standard3ImText'
 
 const App = () => {
   const [template, setTemplate] = useState("")
@@ -21,7 +22,7 @@ const App = () => {
             <StandardImText />
           }
           {template==="standardSLIB" && 
-            <div className="">Standard Single Left Image B</div>
+            <Standard3ImText />
           }
         </div>
       </div>
@@ -55,7 +56,7 @@ const SideBar = ({updateTemplate})=>{
         <input type="radio" id="standardIT" name="template" value="standardIT" onChange={handleUpdate}/>
         <label htmlFor="standardIT" className="px-1">Stnd Img & Text</label><br/>
         <input type="radio" id="standardSLIB" name="template" value="standardSLIB" onChange={handleUpdate}/>
-        <label htmlFor="standardSLIB" className="px-1">Stnd Single Img Left B</label>
+        <label htmlFor="standardSLIB" className="px-1">Stnd 3 Img & Text</label>
       </form>
     </div>
 
